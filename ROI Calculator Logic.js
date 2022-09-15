@@ -311,273 +311,274 @@ const chartsData = {
 
 /** ROI CALCULATOR CHARTS **/
 
+$(document).ready(function () {
+    const roiChart = new Chart(document.getElementById('roiChart'), {
+        // Set chart type
+        type: 'bar',
 
-const roiChart = new Chart(document.getElementById('roiChart'), {
-    // Set chart type
-    type: 'bar',
-
-    // Chart config
-    options: {
-        indexAxis: 'y',
-        scales: {
-            x: {
-                grid: {
+        // Chart config
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                },
+                y: {
+                    beginAtZero: true,
                     display: false,
-                    drawBorder: false,
-                }
-            },
-            y: {
-                beginAtZero: true,
-                display: false,
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                }
-            }
-        },
-        tooltips: {
-            enabled: false,
-        },
-        legend: {
-            display: false,
-        },
-        /*layout: {
-            padding: 16,
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 4 | 3,*/
-        plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
-                        family: "'Biosans','Arial','sans-serif'",
-                        size: 16,
-                        lineHeight: 1.5
+                    grid: {
+                        display: false,
+                        drawBorder: false,
                     }
                 }
             },
-            tooltip: {
-                titleColor: '#1f1f1f',
-                titleFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
-                titleMarginBottom: 4,
-                bodyColor: '#1f1f1f',
-                bodyFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
-                padding: 16,
-                cornerRadius: 0,
-                backgroundColor: '#fff',
-                boxPadding: 8,
-                borderColor: '#ddd',
-                borderWidth: '1'
-            }
-        }
-    },
-
-    // Chart data
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-
-        datasets: [{
-            //label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                '#ffe600',
-            ],
-            borderColor: [
-                '#ffe600',
-            ],
-            borderWidth: 0
-        }]
-    }
-});
-
-let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
-const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
-    // Set chart type
-    type: 'bar',
-
-    // Chart config
-    options: {
-        indexAxis: 'x',
-        scales: {
-            x: {
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                }
+            tooltips: {
+                enabled: false,
             },
-            y: {
-                beginAtZero: true,
-                display: false,
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                }
-            }
-        },
-        tooltips: {
-            enabled: false,
-        },
-        legend: {
-            display: false,
-        },
-        /*layout: {
-            padding: 16,
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 4 | 3,*/
-        plugins: {
             legend: {
                 display: false,
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
+            },
+            /*layout: {
+                padding: 16,
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 4 | 3,*/
+            plugins: {
+                legend: {
+                    display: false,
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            family: "'Biosans','Arial','sans-serif'",
+                            size: 16,
+                            lineHeight: 1.5
+                        }
+                    }
+                },
+                tooltip: {
+                    titleColor: '#1f1f1f',
+                    titleFont: {
                         family: "'Biosans','Arial','sans-serif'",
                         size: 16,
                         lineHeight: 1.5
-                    }
-                }
-            },
-            tooltip: {
-                titleColor: '#1f1f1f',
-                titleFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
-                titleMarginBottom: 4,
-                bodyColor: '#1f1f1f',
-                bodyFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
-                padding: 16,
-                cornerRadius: 0,
-                backgroundColor: '#fff',
-                boxPadding: 8,
-                borderColor: '#ddd',
-                borderWidth: '1'
-            }
-        }
-    },
-
-    // Chart data
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-
-        datasets: [{
-            //label: '# of Votes',
-            data: chartsData.annualBenefit, //[12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                '#ffe600',
-            ],
-            borderColor: [
-                '#ffe600',
-            ],
-            borderWidth: 0
-        }]
-    }
-});
-
-const profitMarginChart = new Chart(document.getElementById('profitMarginChart'), {
-    // Set chart type
-    type: 'line',
-
-    // Chart config
-    options: {
-        indexAxis: 'x',
-        scales: {
-            x: {
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                }
-            },
-            y: {
-                beginAtZero: true,
-                display: true,
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                }
-            }
-        },
-        tooltips: {
-            enabled: false,
-        },
-        legend: {
-            display: false,
-        },
-        /*layout: {
-            padding: 16,
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 4 | 3,*/
-        plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
+                    },
+                    titleMarginBottom: 4,
+                    bodyColor: '#1f1f1f',
+                    bodyFont: {
                         family: "'Biosans','Arial','sans-serif'",
                         size: 16,
                         lineHeight: 1.5
+                    },
+                    padding: 16,
+                    cornerRadius: 0,
+                    backgroundColor: '#fff',
+                    boxPadding: 8,
+                    borderColor: '#ddd',
+                    borderWidth: '1'
+                }
+            }
+        },
+
+        // Chart data
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+            datasets: [{
+                //label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    '#ffe600',
+                ],
+                borderColor: [
+                    '#ffe600',
+                ],
+                borderWidth: 0
+            }]
+        }
+    });
+
+    let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
+    const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
+        // Set chart type
+        type: 'bar',
+
+        // Chart config
+        options: {
+            indexAxis: 'x',
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    display: false,
+                    grid: {
+                        display: false,
+                        drawBorder: false,
                     }
                 }
             },
-            tooltip: {
-                titleColor: '#1f1f1f',
-                titleFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
-                titleMarginBottom: 4,
-                bodyColor: '#1f1f1f',
-                bodyFont: {
-                    family: "'Biosans','Arial','sans-serif'",
-                    size: 16,
-                    lineHeight: 1.5
-                },
+            tooltips: {
+                enabled: false,
+            },
+            legend: {
+                display: false,
+            },
+            /*layout: {
                 padding: 16,
-                cornerRadius: 0,
-                backgroundColor: '#fff',
-                boxPadding: 8,
-                borderColor: '#ddd',
-                borderWidth: '1'
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 4 | 3,*/
+            plugins: {
+                legend: {
+                    display: false,
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            family: "'Biosans','Arial','sans-serif'",
+                            size: 16,
+                            lineHeight: 1.5
+                        }
+                    }
+                },
+                tooltip: {
+                    titleColor: '#1f1f1f',
+                    titleFont: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    },
+                    titleMarginBottom: 4,
+                    bodyColor: '#1f1f1f',
+                    bodyFont: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    },
+                    padding: 16,
+                    cornerRadius: 0,
+                    backgroundColor: '#fff',
+                    boxPadding: 8,
+                    borderColor: '#ddd',
+                    borderWidth: '1'
+                }
             }
+        },
+
+        // Chart data
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+            datasets: [{
+                //label: '# of Votes',
+                data: chartsData.annualBenefit, //[12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    '#ffe600',
+                ],
+                borderColor: [
+                    '#ffe600',
+                ],
+                borderWidth: 0
+            }]
         }
-    },
+    });
 
-    // Chart data
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    const profitMarginChart = new Chart(document.getElementById('profitMarginChart'), {
+        // Set chart type
+        type: 'line',
 
-        datasets: [{
-            //label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                '#ffe60029',
-            ],
-            borderColor: [
-                '#ffe600',
-            ],
-            borderWidth: 4,
-            fill: false,
-            tension: 0
-        }]
-    }
+        // Chart config
+        options: {
+            indexAxis: 'x',
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    display: true,
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                }
+            },
+            tooltips: {
+                enabled: false,
+            },
+            legend: {
+                display: false,
+            },
+            /*layout: {
+                padding: 16,
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 4 | 3,*/
+            plugins: {
+                legend: {
+                    display: false,
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            family: "'Biosans','Arial','sans-serif'",
+                            size: 16,
+                            lineHeight: 1.5
+                        }
+                    }
+                },
+                tooltip: {
+                    titleColor: '#1f1f1f',
+                    titleFont: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    },
+                    titleMarginBottom: 4,
+                    bodyColor: '#1f1f1f',
+                    bodyFont: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    },
+                    padding: 16,
+                    cornerRadius: 0,
+                    backgroundColor: '#fff',
+                    boxPadding: 8,
+                    borderColor: '#ddd',
+                    borderWidth: '1'
+                }
+            }
+        },
+
+        // Chart data
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+            datasets: [{
+                //label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    '#ffe60029',
+                ],
+                borderColor: [
+                    '#ffe600',
+                ],
+                borderWidth: 4,
+                fill: false,
+                tension: 0
+            }]
+        }
+    });
 });
