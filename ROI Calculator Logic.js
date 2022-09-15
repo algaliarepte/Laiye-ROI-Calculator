@@ -312,7 +312,7 @@ const chartsData = {
 /** ROI CALCULATOR CHARTS **/
 
 
-const myChart = new Chart(document.getElementById('myChart'), {
+const roiChart = new Chart(document.getElementById('roiChart'), {
     // Set chart type
     type: 'bar',
 
@@ -402,7 +402,7 @@ const myChart = new Chart(document.getElementById('myChart'), {
 });
 
 let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
-const roiChart = new Chart(document.getElementById('roiChart'), {
+const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
     // Set chart type
     type: 'bar',
 
@@ -479,7 +479,7 @@ const roiChart = new Chart(document.getElementById('roiChart'), {
 
         datasets: [{
             //label: '# of Votes',
-            data: roiChartData,
+            data: chartsData.annualBenefit, //[12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 '#ffe600',
             ],
@@ -491,7 +491,7 @@ const roiChart = new Chart(document.getElementById('roiChart'), {
     }
 });
 
-const savingsChart = new Chart(document.getElementById('savingsChart'), {
+const profitMarginChart = new Chart(document.getElementById('profitMarginChart'), {
     // Set chart type
     type: 'line',
 
