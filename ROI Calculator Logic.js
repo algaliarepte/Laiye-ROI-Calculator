@@ -164,7 +164,8 @@ $('#submit-button').on('click', function () {
             $(this).css('border', '1px solid #ff4242');
         }
         else {
-            roiChartData = chartsData.annualBenefit
+            annualBenefitChart.data.datasets.data = chartsData.annualBenefit
+            annualBenefitChart.update();
         }
     });
 });
@@ -474,7 +475,7 @@ $(window).on('load', function () {
         },
 
         // Chart data
-        data: {
+        /*data: {*/
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 
             datasets: [{
@@ -488,7 +489,7 @@ $(window).on('load', function () {
                 ],
                 borderWidth: 0
             }]
-        }
+        /*}*/
     });
 
     const profitMarginChart = new Chart(document.getElementById('profitMarginChart'), {
