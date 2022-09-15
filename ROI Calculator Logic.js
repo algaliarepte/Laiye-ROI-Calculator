@@ -313,7 +313,7 @@ const chartsData = {
 /** ROI CALCULATOR CHARTS **/
 
 $(window).on('load', function () {
-    const roiChart = new Chart(document.getElementById('roiChart'), {
+    let roiChart = new Chart(document.getElementById('roiChart'), {
         // Set chart type
         type: 'bar',
 
@@ -402,8 +402,8 @@ $(window).on('load', function () {
         }
     });
 
-    //let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
-    const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
+    let annualBenefitData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
+    let annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
         // Set chart type
         type: 'bar',
 
@@ -480,7 +480,7 @@ $(window).on('load', function () {
 
             datasets: [{
                 //label: '# of Votes',
-                data: /*chartsData.annualBenefit,*/ [12, 19, 3, 5, 2, 3],
+                data: annualBenefitData, //[12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#ffe600',
                 ],
