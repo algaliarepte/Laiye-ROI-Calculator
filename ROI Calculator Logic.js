@@ -311,7 +311,7 @@ const chartsData = {
 
 /** ROI CALCULATOR CHARTS **/
 
-$(document).ready(function () {
+$(window).on('load', function () {
     const roiChart = new Chart(document.getElementById('roiChart'), {
         // Set chart type
         type: 'bar',
@@ -401,7 +401,7 @@ $(document).ready(function () {
         }
     });
 
-    let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
+    //let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
     const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
         // Set chart type
         type: 'bar',
