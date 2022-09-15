@@ -480,7 +480,7 @@ $(window).on('load', function () {
 
             datasets: [{
                 //label: '# of Votes',
-                data: chartsData.annualBenefit, //[12, 19, 3, 5, 2, 3],
+                data: /*chartsData.annualBenefit,*/ [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#ffe600',
                 ],
@@ -583,5 +583,3 @@ $(window).on('load', function () {
         }
     });
 });
-
-x
