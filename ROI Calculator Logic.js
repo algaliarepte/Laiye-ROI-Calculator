@@ -1,7 +1,5 @@
-/*** ROI CALCULATOR LOGIC & BEHAVIOR ***/
-
-
 /** CALCULATIONS VARIABLES **/
+
 
 const subTotals = {
     get savedHoursPerYear() {
@@ -81,7 +79,10 @@ const costs = {
 
 let hypothesis = parseFloat($('#hypothesis').val())
 
+
 /** DISPLAY RESULTS **/
+
+
 function displayResults() {
     // Format numbers as currencies
     function formatNbr(nStr) {
@@ -140,7 +141,9 @@ $('.input-field').on('change', function () {
     displayResults();
 });
 
+
 /** SHOWN INPUT ERRORS **/
+
 
 // Highlight errors on inputs change (when input value is empty)
 $('.input-field').on('blur', function () {
@@ -167,7 +170,7 @@ $('#submit-button').on('click', function () {
 });
 
 
-/*** ROI CALCULATOR CHARTS ***/
+/** ROI CALCULATOR CHARTS DATA **/
 
 
 const npv = {
@@ -304,3 +307,277 @@ const chartsData = {
         return [monthlyNpv.m1, monthlyNpv.m2, monthlyNpv.m3, monthlyNpv.m4, monthlyNpv.m5, monthlyNpv.m6, monthlyNpv.m7, monthlyNpv.m8, monthlyNpv.m9, monthlyNpv.m10, monthlyNpv.m11, monthlyNpv.m12, monthlyNpv.m13, monthlyNpv.m14, monthlyNpv.m15, monthlyNpv.m16, monthlyNpv.m17, monthlyNpv.m18, monthlyNpv.m19, monthlyNpv.m20, monthlyNpv.m21, monthlyNpv.m22, monthlyNpv.m23, monthlyNpv.m24]
     }
 }
+
+
+/** ROI CALCULATOR CHARTS **/
+
+
+const myChart = new Chart(document.getElementById('myChart'), {
+    // Set chart type
+    type: 'bar',
+
+    // Chart config
+    options: {
+        indexAxis: 'y',
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            },
+            y: {
+                beginAtZero: true,
+                display: false,
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            }
+        },
+        tooltips: {
+            enabled: false,
+        },
+        legend: {
+            display: false,
+        },
+        /*layout: {
+            padding: 16,
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 4 | 3,*/
+        plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    }
+                }
+            },
+            tooltip: {
+                titleColor: '#1f1f1f',
+                titleFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                titleMarginBottom: 4,
+                bodyColor: '#1f1f1f',
+                bodyFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                padding: 16,
+                cornerRadius: 0,
+                backgroundColor: '#fff',
+                boxPadding: 8,
+                borderColor: '#ddd',
+                borderWidth: '1'
+            }
+        }
+    },
+
+    // Chart data
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+        datasets: [{
+            //label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                '#ffe600',
+            ],
+            borderColor: [
+                '#ffe600',
+            ],
+            borderWidth: 0
+        }]
+    }
+});
+
+let roiChartData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
+const roiChart = new Chart(document.getElementById('roiChart'), {
+    // Set chart type
+    type: 'bar',
+
+    // Chart config
+    options: {
+        indexAxis: 'x',
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            },
+            y: {
+                beginAtZero: true,
+                display: false,
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            }
+        },
+        tooltips: {
+            enabled: false,
+        },
+        legend: {
+            display: false,
+        },
+        /*layout: {
+            padding: 16,
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 4 | 3,*/
+        plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    }
+                }
+            },
+            tooltip: {
+                titleColor: '#1f1f1f',
+                titleFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                titleMarginBottom: 4,
+                bodyColor: '#1f1f1f',
+                bodyFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                padding: 16,
+                cornerRadius: 0,
+                backgroundColor: '#fff',
+                boxPadding: 8,
+                borderColor: '#ddd',
+                borderWidth: '1'
+            }
+        }
+    },
+
+    // Chart data
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+        datasets: [{
+            //label: '# of Votes',
+            data: roiChartData,
+            backgroundColor: [
+                '#ffe600',
+            ],
+            borderColor: [
+                '#ffe600',
+            ],
+            borderWidth: 0
+        }]
+    }
+});
+
+const savingsChart = new Chart(document.getElementById('savingsChart'), {
+    // Set chart type
+    type: 'line',
+
+    // Chart config
+    options: {
+        indexAxis: 'x',
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            },
+            y: {
+                beginAtZero: true,
+                display: true,
+                grid: {
+                    display: false,
+                    drawBorder: false,
+                }
+            }
+        },
+        tooltips: {
+            enabled: false,
+        },
+        legend: {
+            display: false,
+        },
+        /*layout: {
+            padding: 16,
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 4 | 3,*/
+        plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        family: "'Biosans','Arial','sans-serif'",
+                        size: 16,
+                        lineHeight: 1.5
+                    }
+                }
+            },
+            tooltip: {
+                titleColor: '#1f1f1f',
+                titleFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                titleMarginBottom: 4,
+                bodyColor: '#1f1f1f',
+                bodyFont: {
+                    family: "'Biosans','Arial','sans-serif'",
+                    size: 16,
+                    lineHeight: 1.5
+                },
+                padding: 16,
+                cornerRadius: 0,
+                backgroundColor: '#fff',
+                boxPadding: 8,
+                borderColor: '#ddd',
+                borderWidth: '1'
+            }
+        }
+    },
+
+    // Chart data
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+        datasets: [{
+            //label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                '#ffe60029',
+            ],
+            borderColor: [
+                '#ffe600',
+            ],
+            borderWidth: 4,
+            fill: false,
+            tension: 0
+        }]
+    }
+});
