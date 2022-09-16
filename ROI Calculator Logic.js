@@ -82,20 +82,20 @@ let hypothesis = parseFloat($('#hypothesis').val())
 
 /** DISPLAY RESULTS **/
 
+// Format numbers as currencies
+function formatNbr(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ' ' + '$2');
+    }
+    return '$ ' + x1 + x2;
+}
 
 function displayResults() {
-    // Format numbers as currencies
-    function formatNbr(nStr) {
-        nStr += '';
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ' ' + '$2');
-        }
-        return '$' + x1 + x2;
-    }
 
     // Update form block totals and subtotals
     $('#savedHoursPerYear').text(formatNbr(subTotals.savedHoursPerYear)) || 0;
@@ -149,25 +149,21 @@ $('.input-field').on('change', function () {
 $('.input-field').on('blur', function () {
     if (!$(this).val()) {
         $(this).css('border', '1px solid #ff4242');
+        $('#submit-button').addClass('clickable-off')
+        $('#submit-button').css('background-color', '#737373')
     }
     else {
         $(this).css('border', 'none');
+        $('#submit-button').removeClass('clickable-off')
+        $('#submit-button').css('background-color', '#000')
     }
 });
 
 /* Submission behavior */
 
 $('#submit-button').on('click', function () {
-    $('.input-field').each(function () {
-        // Highlight errors on submit (when input value is empty)
-        if (!$(this).val()) {
-            $(this).css('border', '1px solid #ff4242');
-        }
-        else {
-            annualBenefitChart.data.datasets.data = chartsData.annualBenefit
-            annualBenefitChart.update();
-        }
-    });
+    $('#analysisBlock').toggleClass('uc-hide');
+    $('#calculatorBlock').toggleClass('uc-hide');
 });
 
 
@@ -299,13 +295,13 @@ const chartsData = {
     },
 
     get roi() {
-        return [roiPercentage.y1, roiPercentage.y2, roiPercentage.y3, roiPercentage.y4, roiPercentage.y5]
+        return [roiPercentage.y1.toFixed(2), roiPercentage.y2.toFixed(2), roiPercentage.y3.toFixed(2), roiPercentage.y4.toFixed(2), roiPercentage.y5.toFixed(2)]
     },
     get annualBenefit() {
         return [0 - costs.proServiceTraining, savings.firstYear, savings.firstYear, savings.firstYear, savings.firstYear, savings.firstYear]
     },
     get profitMargin() {
-        return [monthlyNpv.m1, monthlyNpv.m2, monthlyNpv.m3, monthlyNpv.m4, monthlyNpv.m5, monthlyNpv.m6, monthlyNpv.m7, monthlyNpv.m8, monthlyNpv.m9, monthlyNpv.m10, monthlyNpv.m11, monthlyNpv.m12, monthlyNpv.m13, monthlyNpv.m14, monthlyNpv.m15, monthlyNpv.m16, monthlyNpv.m17, monthlyNpv.m18, monthlyNpv.m19, monthlyNpv.m20, monthlyNpv.m21, monthlyNpv.m22, monthlyNpv.m23, monthlyNpv.m24]
+        return [Math.round(monthlyNpv.m1), Math.round(monthlyNpv.m2), Math.round(monthlyNpv.m3), Math.round(monthlyNpv.m4), Math.round(monthlyNpv.m5), Math.round(monthlyNpv.m6), Math.round(monthlyNpv.m7), Math.round(monthlyNpv.m8), Math.round(monthlyNpv.m9), Math.round(monthlyNpv.m10), Math.round(monthlyNpv.m11), Math.round(monthlyNpv.m12), Math.round(monthlyNpv.m13), Math.round(monthlyNpv.m14), Math.round(monthlyNpv.m15), Math.round(monthlyNpv.m16), Math.round(monthlyNpv.m17), Math.round(monthlyNpv.m18), Math.round(monthlyNpv.m19), Math.round(monthlyNpv.m20), Math.round(monthlyNpv.m21), Math.round(monthlyNpv.m22), Math.round(monthlyNpv.m23), Math.round(monthlyNpv.m24)]
     }
 }
 
@@ -313,7 +309,7 @@ const chartsData = {
 /** ROI CALCULATOR CHARTS **/
 
 $(window).on('load', function () {
-    let roiChart = new Chart(document.getElementById('roiChart'), {
+    const roiChart = new Chart(document.getElementById('roiChart'), {
         // Set chart type
         type: 'bar',
 
@@ -379,7 +375,16 @@ $(window).on('load', function () {
                     backgroundColor: '#fff',
                     boxPadding: 8,
                     borderColor: '#ddd',
-                    borderWidth: '1'
+                    borderWidth: '1',
+                    callbacks: {
+                        // afterLabel : 'x'
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+
+                            label += new Intl.NumberFormat('en-US', { style: 'percent' }).format(context.parsed.x);
+                            return label;
+                        }
+                    }
                 }
             }
         },
@@ -390,7 +395,7 @@ $(window).on('load', function () {
 
             datasets: [{
                 //label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: chartsData.roi, //[12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#ffe600',
                 ],
@@ -402,8 +407,7 @@ $(window).on('load', function () {
         }
     });
 
-    let annualBenefitData = chartsData.annualBenefit //[12, 19, 3, 5, 2, 3]
-    let annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
+    const annualBenefitChart = new Chart(document.getElementById('annualBenefitChart'), {
         // Set chart type
         type: 'bar',
 
@@ -469,18 +473,26 @@ $(window).on('load', function () {
                     backgroundColor: '#fff',
                     boxPadding: 8,
                     borderColor: '#ddd',
-                    borderWidth: '1'
+                    borderWidth: '1',
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+
+                            label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(context.parsed.y);
+                            return label;
+                        }
+                    }
                 }
-            }
+            },
         },
 
         // Chart data
-        /*data: {*/
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        data: {
+            labels: ['First year', 'Second year', 'Third year', 'Fourth year', 'Fifth year'],
 
             datasets: [{
                 //label: '# of Votes',
-                data: annualBenefitData, //[12, 19, 3, 5, 2, 3],
+                data: chartsData.netCashFlow, //[12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#ffe600',
                 ],
@@ -489,7 +501,7 @@ $(window).on('load', function () {
                 ],
                 borderWidth: 0
             }]
-        /*}*/
+        }
     });
 
     const profitMarginChart = new Chart(document.getElementById('profitMarginChart'), {
@@ -558,18 +570,26 @@ $(window).on('load', function () {
                     backgroundColor: '#fff',
                     boxPadding: 8,
                     borderColor: '#ddd',
-                    borderWidth: '1'
+                    borderWidth: '1',
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+
+                            label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(context.parsed.y);
+                            return label;
+                        }
+                    }
                 }
             }
         },
 
         // Chart data
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['1 month', '', '3 month', '', '5 month', '', '7 month', '', '9 month', '', '11 month', '', '13 month', '', '15 month', '', '17 month', '', '19 month', '', '21 month', '', '23 month', ''],
 
             datasets: [{
                 //label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: chartsData.profitMargin, //[12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#ffe60029',
                 ],
@@ -583,3 +603,24 @@ $(window).on('load', function () {
         }
     });
 });
+
+
+/** EXCEL DOWNLOAD **/
+
+/*function downloadAsExcel(args) {
+    var dataPoints, filename;
+    filename = args.filename || 'chart-data';
+
+    dataPoints = args.chart.data.datasets.data;
+    dataPoints.unshift({ x: "X Value", y: "Y-Value" });
+    var ws = XLSX.utils.json_to_sheet(dataPoints, { skipHeader: true, dateNF: 'YYYYMMDD HH:mm:ss' });
+    if (!ws['!cols']) ws['!cols'] = [];
+    ws['!cols'][0] = { wch: 17 };
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, filename);
+    XLSX.writeFile(wb, filename + ".xlsx");
+}
+
+$('#xlsxButton').on('click', function () {
+    downloadAsExcel({ filename: "chart-data", chart: annualBenefitChart })
+});*/
