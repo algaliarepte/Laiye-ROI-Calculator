@@ -603,24 +603,3 @@ $(window).on('load', function () {
         }
     });
 });
-
-
-/** EXCEL DOWNLOAD **/
-
-/*function downloadAsExcel(args) {
-    var dataPoints, filename;
-    filename = args.filename || 'chart-data';
-
-    dataPoints = args.chart.data.datasets.data;
-    dataPoints.unshift({ x: "X Value", y: "Y-Value" });
-    var ws = XLSX.utils.json_to_sheet(dataPoints, { skipHeader: true, dateNF: 'YYYYMMDD HH:mm:ss' });
-    if (!ws['!cols']) ws['!cols'] = [];
-    ws['!cols'][0] = { wch: 17 };
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, filename);
-    XLSX.writeFile(wb, filename + ".xlsx");
-}
-
-$('#xlsxButton').on('click', function () {
-    downloadAsExcel({ filename: "chart-data", chart: annualBenefitChart })
-});*/
